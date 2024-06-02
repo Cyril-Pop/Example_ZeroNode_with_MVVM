@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using Autodesk.DesignScript.Runtime;
 using System.Text.RegularExpressions;
 using Dynamo.Logging;
+using System.Collections.ObjectModel;
 
 
 namespace Custom_UINode.Element.View
@@ -32,13 +33,13 @@ namespace Custom_UINode.Element.View
         {
             return viewModel;
         }
-        private Dictionary<string, List<string>> _dictData;
+        private Dictionary<string, ObservableCollection<string>> _dictData;
         private DynamoLogger logger = UserUI.GetLogger();
         /// <summary>
         /// construtor
         /// </summary>
         /// <param name="dictData"></param>
-        public SelectFromDictionaryWindow(Dictionary<string, List<string>> dictData)
+        public SelectFromDictionaryWindow(Dictionary<string, ObservableCollection<string>> dictData)
         {
             InitializeComponent();
             // Setting the DataContext
