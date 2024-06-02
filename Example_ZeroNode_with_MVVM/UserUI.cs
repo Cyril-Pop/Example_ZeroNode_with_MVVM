@@ -5,18 +5,11 @@ using System.Reflection;
 using Dynamo.Graph.Nodes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Revit.Elements;
-using Revit.GeometryConversion;
-using RevitServices.Persistence;
-using RevitServices.Transactions;
-using DS = Autodesk.DesignScript.Geometry;
 using Application = System.Windows.Application;
 using Custom_UINode.Element.View;
 using System.Linq;
-using Autodesk.DesignScript.Geometry;
 using System.Collections;
 using System.Text;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Input;
 using Autodesk.DesignScript.Runtime;
 using Dynamo.Configuration;
@@ -63,6 +56,7 @@ namespace Custom_UINode.Element
             string input_json_dict = JsonConvert.SerializeObject(DSDict, Formatting.Indented);
             string json_values = JsonConvert.SerializeObject(values, Formatting.Indented);
             logger?.Log($"SelectFromDictionary -> input_json_dict {input_json_dict}", LogLevel.File);
+
             // convert DesignScript.Builtin.Dictionary to .Net Dictionnary
             //Dictionary<string, List<string>> dictionary = new Dictionary<string, List<string>>();
             Dictionary<string, ObservableCollection<string>> dictionary = new Dictionary<string, ObservableCollection<string>>();
@@ -74,6 +68,7 @@ namespace Custom_UINode.Element
             }
             SelectFromDictionaryWindow view = new SelectFromDictionaryWindow(dictionary);
             view.ShowDialog();
+            // get viewModel
             ViewModel.SelectFromDictionaryViewModel vm = view.GetViewModel();
             //create a new dictionary from view model,convert values and return it 
             var d = new Dictionary<string, object>();
