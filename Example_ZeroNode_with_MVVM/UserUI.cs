@@ -59,11 +59,9 @@ namespace Custom_UINode.Element
             logger?.Log($"SelectFromDictionary -> input_json_dict {input_json_dict}", LogLevel.File);
 
             // convert DesignScript.Builtin.Dictionary to .Net Dictionnary
-            //Dictionary<string, List<string>> dictionary = new Dictionary<string, List<string>>();
             Dictionary<string, ObservableCollection<string>> dictionary = new Dictionary<string, ObservableCollection<string>>();
             for (int i = 0; i < keys.Count; i++)
             {
-               // dictionary[keys[i]] = ((IEnumerable)values[i]).Cast<object>().Select(x => x.ToString()).ToList();
                List<string> list_values = ((IEnumerable)values[i]).Cast<object>().Select(x => x.ToString()).ToList();
                dictionary[keys[i]] = new ObservableCollection<string>(list_values);
             }
@@ -73,12 +71,23 @@ namespace Custom_UINode.Element
             ViewModel.SelectFromDictionaryViewModel vm = view.GetViewModel();
             //create a new dictionary from view model,convert values and return it 
             var d = new Dictionary<string, object>();
-            d.Add("key", vm.SelectedKey);
-            d.Add("values", vm.SelectedValues.Select(int.Parse).ToList());
-            string out_json_dict = JsonConvert.SerializeObject(d, Formatting.Indented);
-            logger?.Log($"SelectFromDictionary -> out_json_dict {out_json_dict}", LogLevel.File);
+            // if viewmodel and SelectedKey are not null 
+            if (vm is object && vm.SelectedKey is object)
+            {
+                d.Add("key", vm.SelectedKey);
+                d.Add("values", vm.SelectedValues.Select(int.Parse).ToList());
+                string out_json_dict = JsonConvert.SerializeObject(d, Formatting.Indented);
+                logger?.Log($"SelectFromDictionary -> out_json_dict {out_json_dict}", LogLevel.File);
+  
+            }
+            else
+            {
+                d.Add("key", "ERROR");
+                d.Add("values", null);
+            }
             logger?.Dispose();
             return d;
+
         }
     }
 }
