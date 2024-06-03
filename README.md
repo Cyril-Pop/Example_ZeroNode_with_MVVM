@@ -9,4 +9,4 @@ the special features used here :
   - WPF + MVVM pattern
   - DynamoLogger for debugging
 
-
+*not being a C# expert, sorry for the bad C# typo you might encounter here*
