@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Custom_UINode.Element.View"
         mc:Ignorable="d"
         DataContext="Custom_UINode.ViewModel.SelectFromDictionaryViewModel"
-        Title="Window2" Height="260" Width="500">
+        Title="Window2" Height="260" Width="500" x:ClassModifier="internal"> <!--this allows the system category to not show up, Thanks John P. :) -->
     <StackPanel Margin="10">
         <ComboBox Name="cmbSelect"
                   ItemsSource="{Binding Data.Keys}"

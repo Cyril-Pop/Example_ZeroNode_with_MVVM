@@ -21,7 +21,7 @@ namespace Custom_UINode.Element.View
     /// Interaction for Window
     /// </summary>
     [IsVisibleInDynamoLibrary(false)]
-    public partial class SelectFromDictionaryWindow : Window
+    partial class SelectFromDictionaryWindow : Window
     {
         private ViewModel.SelectFromDictionaryViewModel viewModel;
         // acces of viewModel outside the class 
@@ -31,6 +31,8 @@ namespace Custom_UINode.Element.View
         }
         private Dictionary<string, ObservableCollection<string>> _dictData;
         private DynamoLogger logger = UserUI.GetLogger();
+
+        [IsVisibleInDynamoLibrary(false)]
         /// <summary>
         /// construtor
         /// </summary>
